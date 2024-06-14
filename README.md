@@ -1,2 +1,2 @@
 # JavaProject_Team2
-Template repo for Java project
+Template repo for Java project.
