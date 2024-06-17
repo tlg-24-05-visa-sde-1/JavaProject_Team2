@@ -18,13 +18,14 @@ public enum Value {
     KING(10),
     ACE(11);
 
-    private final int value;
-    Value(int value) {
-        this.value = value;
+    final int cardValue;
+
+    Value(int cardValue) {
+        this.cardValue = cardValue;
     }
 
     @Override
     public String toString() {
-        return String.valueOf(value);
+        return String.valueOf(cardValue);
     }
 }

@@ -13,7 +13,16 @@ public class Card {
         this.value = value;
     }
 
+    public Card(Card card) {
+        this.suit = card.getSuit();
+        this.value = card.getValue();
+    }
+
     // ctors
+    public int getCardValue(){
+        return value.cardValue;
+    }
+
     public Suit getSuit() {
         return suit;
     }
@@ -21,5 +30,7 @@ public class Card {
     public Value getValue() {
         return value;
     }
+
+
 
 }
