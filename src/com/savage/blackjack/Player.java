@@ -11,6 +11,10 @@ class Player {
     public Player(){
     }
 
+    public Player(String name){
+        this.name = name;
+    }
+
     public PlayerResponse responseToDealer(){
         return PlayerResponse.HIT_ME;
     }

@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-class Dealer extends Player{
+public class Dealer extends Player{
     private String name;
     private List<Player> players = new ArrayList<>();
 
@@ -26,5 +26,9 @@ class Dealer extends Player{
         Map<String, Integer > cards = null;
 
         return card;
+    }
+
+    public void addPlayer(String name){
+        players.add(new Player(name));
     }
 }
