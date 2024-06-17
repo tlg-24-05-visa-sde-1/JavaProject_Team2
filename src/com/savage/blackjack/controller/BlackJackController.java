@@ -1,6 +1,7 @@
 package com.savage.blackjack.controller;
 
 import com.apps.util.Prompter;
+import com.savage.blackjack.Dealer;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -12,11 +13,14 @@ import static com.apps.util.Console.pause;
 
 public class BlackJackController {
     private final Prompter prompter = new Prompter(new Scanner(System.in));
+    private final Dealer dealer = new Dealer();
 
 
     public void playGame() {
         welcome();
         playerQuestions();
+        beginGame();
+        finalResults();
         goodBye();
     }
 
@@ -33,6 +37,26 @@ public class BlackJackController {
     }
 
     public void playerQuestions(){
+        clear();
+
+        boolean finished = false;
+        while (!finished){
+            String playerInput = prompter.prompt("Please enter your name, then press [Enter] when done: ");
+            if(!playerInput.trim().isEmpty()) {
+                dealer.addPlayer(playerInput);
+            }
+            else {
+                finished = true;
+            }
+        }
+        goodBye();
+    }
+
+    public void beginGame() {
+
+    }
+
+    public void finalResults(){
 
     }
 
