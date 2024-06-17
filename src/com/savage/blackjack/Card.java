@@ -54,7 +54,7 @@ public enum Card {
     QUEEN_DIAMONDS(10),
     KING_DIAMONDS(10);
 
-    private int value;
+    private final int value;
 
     Card(int value) {
         this.value = value;
