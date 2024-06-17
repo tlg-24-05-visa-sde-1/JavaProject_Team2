@@ -1,36 +1,14 @@
 package com.savage.blackjack;
 
-public class Card {
-    private final Suit suit;
-    private final Value value;
+public enum Card {
+    ACE_SPADES(11),
+    TWO_SPADES(2),
+    THREE_SPADES(3),
+    FOUR_SPADES(4);
 
-    /*
-     * Below the Suit of the card is created
-     * Below the Value of the card is created
-     */
-    public Card(Suit suit, Value value) {
-        this.suit = suit;
+    private int value;
+
+    Card(int value) {
         this.value = value;
     }
-
-    public Card(Card card) {
-        this.suit = card.getSuit();
-        this.value = card.getValue();
-    }
-
-    // ctors
-    public int getCardValue(){
-        return value.cardValue;
-    }
-
-    public Suit getSuit() {
-        return suit;
-    }
-
-    public Value getValue() {
-        return value;
-    }
-
-
-
 }
