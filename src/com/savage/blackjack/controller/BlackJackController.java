@@ -2,6 +2,7 @@ package com.savage.blackjack.controller;
 
 import com.apps.util.Prompter;
 import com.savage.blackjack.Dealer;
+import com.savage.blackjack.Hand;
 import com.savage.blackjack.Player;
 
 import java.io.IOException;
@@ -12,17 +13,20 @@ import java.util.Scanner;
 import static com.apps.util.Console.clear;
 import static com.apps.util.Console.pause;
 
+
 public class BlackJackController {
-//    private String playerName;
+    //    private String playerName;
     private final Prompter prompter = new Prompter(new Scanner(System.in));
     private final Dealer dealer = new Dealer();
     private final Player player = new Player();
+    private final Hand hand = new Hand();
 
 
     public void playGame() {
         welcome();
         playerQuestions();
-        beginGame();
+        dealer.dealCards(player);
+        hand.scoreHand();
         finalResults();
         goodBye();
     }
@@ -56,7 +60,7 @@ public class BlackJackController {
 //        goodBye();
     }
 
-    private void hitMeOrStand() {
+/*    private void hitMeOrStand() {
         clear();
 
         player.scoreHand();
@@ -70,33 +74,28 @@ public class BlackJackController {
                 player.scoreHand();
             }
         }
-    }
+    }*/
 
-    public void beginGame() {
+/*    public void beginGame() {
         // might need to be in a while loop
         boolean gameIsOn = true;
 
-            dealer.dealCards();
-            player.scoreHand();
-//            //        player.hasBlackJack();  // not sure if we need to call before if statement
-//            //        dealer.hasBlackJack();
-//
-//            if (player.hasBlackJack() || dealer.hasBlackJack()) {
-//                finalResults();
-//                goodBye();
-//                break;
-//            }
-//
-//            gameIsOn = false;
-//
-//            hitMeOrStand();
 
 
+            //        player.hasBlackJack();  // not sure if we need to call before if statement
+            //        dealer.hasBlackJack();
 
+            if (player.hasBlackJack() || dealer.hasBlackJack()) {
+                finalResults();
+                goodBye();
+                break;
+            }
 
+            gameIsOn = false;
 
+            hitMeOrStand();
 
-    }
+     }*/
 
 
 
