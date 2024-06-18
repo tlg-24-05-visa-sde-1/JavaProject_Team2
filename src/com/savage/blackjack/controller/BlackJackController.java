@@ -15,7 +15,7 @@ import static com.apps.util.Console.pause;
 
 
 public class BlackJackController {
-//    private String playerName;
+    //    private String playerName;
     private final Prompter prompter = new Prompter(new Scanner(System.in));
     private final Dealer dealer = new Dealer();
     private final Player player = new Player();
