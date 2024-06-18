@@ -7,21 +7,31 @@ import java.util.Map;
 
 
 public class Dealer extends Player{
+
     private String name;
-//    private List<Card> dealerCards = new ArrayList<>();
+    private Hand dealerHand = new Hand();
     private List<Player> players = new ArrayList<>();
-//    private Player player = new Player();
-    private Hand hand = new Hand();
+    private Map<Player, Hand> playerHands = new HashMap<>();
+//    private Hand hand = new Hand();
 
     public Dealer() {
     }
 
     public void shuffleCards(){
-
     }
 
-    public void dealCards(Player player){
-        hand.addCards();
+    public void addPlayer(String name){
+        Player player = new Player(name);
+        players.add(player);
+        playerHands.put(player, new Hand());
+    }
+
+    public void dealCards(){
+        for(Player player : players){
+            Hand hand = playerHands.get(player);
+            hand.addCards();
+        }
+        dealerHand.addCards();
     }
 
     public List<Integer> giveCard(){
@@ -32,10 +42,15 @@ public class Dealer extends Player{
         return cards;
     }
 
-
-    public void addPlayer(String name){
-        players.add(new Player(name));
+    public void showHands() {
+        for (Player player : players) {
+            System.out.println(player.getName() + "'s hand:");
+            playerHands.get(player).scoreHand();
+        }
+        System.out.println("Dealer's hand:");
+        dealerHand.scoreHand();
     }
+
 
     public String toString() {
         return "name= " + name;

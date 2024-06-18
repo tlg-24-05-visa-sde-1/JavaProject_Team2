@@ -1,62 +1,56 @@
 package com.savage.blackjack;
+
 import java.util.ArrayList;
 import java.util.List;
 
-/*
- * Hand class needs a collection/list of cards
- * the ability to add cards
- * a method to add and calculate the total value of the cards in hand
- * keep track of the aces (Iterate or map)
- * a bust method
- * has black jack?
- */
-
-//Class definition
 public class Hand {
-    //List to store the cards in a hand
-    private final List<Card> cards = new ArrayList<>();
+    public static final Integer BLACK_JACK_NUM = 21;
 
-    // constructor
-    public Hand() {;
+    private List<Card> hand;
+
+    public Hand(){
+        hand = new ArrayList<>();
     }
 
-    //the ability to add and create cards
-    public void addCard(Card card){
-        cards.add(card);
+
+    public void addCards() {
+        // Get 2 shuffled cards from CardEnum and add them to myCards
+        // List in Player and dealerCards
+        hand.add(Card.ACE_HEARTS);
+        hand.add(Card.FOUR_SPADES);
     }
 
-    public int handValue(){
-     int value = 0; // add up the value of cards in hand
-     int aces = 0;
-        for (Card card : cards) {
-            value += card.getValue();
-            if (card.getValue() == 11){
-                aces++;// increments count of aces
-            }
-            while ( value > 21 && aces > 0 ) {
-                value -= 10;
-                aces--; // decreases count of aces
-            }
+    public boolean isBlackJack() {
+        boolean result = false;
+        int sum = 0;
+        for(Card card : hand){
+            sum += card.getValue();
         }
-        return value;
+
+        if(sum == BLACK_JACK_NUM){
+            result = true;
+        }
+        return result;
     }
 
-    // conditional statement for 21
-    public boolean hasBlackjack() {
-        return cards.size() == 2 && handValue() == 21;
-    }
-    // if hand is over 21, it's bust
-    boolean handIsBust(){
-        return handValue() > 21;
+    public boolean isBusted() {
+        return true;
     }
 
-    public List<Card> getCards() {
-        return cards;
+    public void scoreHand(){
+        for (Card card : hand){
+            System.out.println(card.getValue());
+        }
+        // iterate through myCards and show current player hand
     }
 
-    @Override
-    public String toString() {
-        return "Hand{" + "cards=" + handValue() + '}';
+    public String toString(){
+        String output = "";
+        for(Card card : hand){
+            System.out.println(card.getValue());
+        }
+        return output;
     }
 }
+
 
