@@ -1,5 +1,9 @@
 package com.savage.blackjack;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
 public enum Card {
     ACE_SPADES(11, "resources/spades/ace_of_spades.txt"),
     TWO_SPADES(2, "resources/spades/two_of_spades.txt"),
@@ -68,5 +72,14 @@ public enum Card {
 
     public String getImage() {
         return image;
+    }
+
+    public String getImageContent() {
+        try{
+            return new String(Files.readAllBytes(Paths.get(image)));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "Error reading image";
     }
 }
