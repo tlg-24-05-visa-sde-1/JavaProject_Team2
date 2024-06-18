@@ -12,7 +12,7 @@ public class Dealer extends Player{
     private Hand dealerHand = new Hand();
     private List<Player> players = new ArrayList<>();
     private Map<Player, Hand> playerHands = new HashMap<>();
-//    private Hand hand = new Hand();
+    private List<Card> deck;
 
     public Dealer() {
     }
@@ -40,6 +40,13 @@ public class Dealer extends Player{
         // myCards list in Player
 
         return cards;
+    }
+
+    public Card giveNextCard() { // *Dai* - I added this method for the hit or stand
+        if (deck.isEmpty()) {
+            throw new IllegalStateException("Deck is empty, cannot deal anymore cards");
+        }
+        return deck.remove(0);
     }
 
     public void showHands() {
