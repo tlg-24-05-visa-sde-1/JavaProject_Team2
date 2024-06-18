@@ -8,9 +8,9 @@ import java.util.Map;
 
 public class Dealer extends Player{
     private String name;
-    //    private List<Card> dealerCards = new ArrayList<>();
+//    private List<Card> dealerCards = new ArrayList<>();
     private List<Player> players = new ArrayList<>();
-    //    private Player player = new Player();
+//    private Player player = new Player();
     private Hand hand = new Hand();
 
     public Dealer() {
