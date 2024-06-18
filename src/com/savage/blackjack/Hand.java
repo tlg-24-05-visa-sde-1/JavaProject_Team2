@@ -1,49 +1,62 @@
 package com.savage.blackjack;
-
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+ * Hand class needs a collection/list of cards
+ * the ability to add cards
+ * a method to add and calculate the total value of the cards in hand
+ * keep track of the aces (Iterate or map)
+ * a bust method
+ * has black jack?
+ */
+
+//Class definition
 public class Hand {
-    public static final Integer BLACK_JACK_NUM = 21;
+    //List to store the cards in a hand
+    private final List<Card> cards = new ArrayList<>();
 
-    private List<Card> cards = new ArrayList<>();
-
-    public Hand(){
+    // constructor
+    public Hand() {;
     }
 
-
-    public void addCards() {
-        // Get 2 shuffled cards from CardEnum and add them to myCards
-        // List in Player and dealerCards
-        cards.add(Card.ACE_HEARTS);
-        cards.add(Card.FOUR_SPADES);
+    //the ability to add and create cards
+    public void addCard(Card card){
+        cards.add(card);
     }
 
-    public boolean isBlackJack() {
-        boolean result = false;
-        int sum = 0;
-        for(Card card : cards){
-            sum += card.getValue();
+    public int handValue(){
+     int value = 0; // add up the value of cards in hand
+     int aces = 0;
+        for (Card card : cards) {
+            value += card.getValue();
+            if (card.getValue() == 11){
+                aces++;// increments count of aces
+            }
+            while ( value > 21 && aces > 0 ) {
+                value -= 10;
+                aces--; // decreases count of aces
+            }
         }
-
-        if(sum == BLACK_JACK_NUM){
-            result = true;
-        }
-        return result;
+        return value;
     }
 
-    public boolean isBusted() {
-        return true;
+    // conditional statement for 21
+    public boolean hasBlackjack() {
+        return cards.size() == 2 && handValue() == 21;
+    }
+    // if hand is over 21, it's bust
+    boolean handIsBust(){
+        return handValue() > 21;
     }
 
-    public void scoreHand(){
-        for (Card card : cards){
-            System.out.println(card.getValue());
-        }
-        // iterate through myCards and show current player hand
+    public List<Card> getCards() {
+        return cards;
     }
 
-//    public int getCardValue(){
-//        return 0;
-//    }
+    @Override
+    public String toString() {
+        return "Hand{" + "cards=" + handValue() + '}';
+    }
 }
+
