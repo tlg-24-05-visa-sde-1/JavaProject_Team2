@@ -6,23 +6,24 @@ import java.util.List;
 public class Hand {
     public static final Integer BLACK_JACK_NUM = 21;
 
-    private List<Card> cards = new ArrayList<>();
+    private List<Card> hand;
 
     public Hand(){
+        hand = new ArrayList<>();
     }
 
 
     public void addCards() {
         // Get 2 shuffled cards from CardEnum and add them to myCards
         // List in Player and dealerCards
-        cards.add(Card.ACE_HEARTS);
-        cards.add(Card.FOUR_SPADES);
+        hand.add(Card.ACE_HEARTS);
+        hand.add(Card.FOUR_SPADES);
     }
 
     public boolean isBlackJack() {
         boolean result = false;
         int sum = 0;
-        for(Card card : cards){
+        for(Card card : hand){
             sum += card.getValue();
         }
 
@@ -37,13 +38,17 @@ public class Hand {
     }
 
     public void scoreHand(){
-        for (Card card : cards){
+        for (Card card : hand){
             System.out.println(card.getValue());
         }
         // iterate through myCards and show current player hand
     }
 
-//    public int getCardValue(){
-//        return 0;
-//    }
+    public String toString(){
+        String output = "";
+        for(Card card : hand){
+            System.out.println(card.getValue());
+        }
+        return output;
+    }
 }

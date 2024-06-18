@@ -18,15 +18,15 @@ public class BlackJackController {
 //    private String playerName;
     private final Prompter prompter = new Prompter(new Scanner(System.in));
     private final Dealer dealer = new Dealer();
-    private final Player player = new Player();
-    private final Hand hand = new Hand();
+//    private final Player player = new Player();
+//    private final Hand hand = new Hand();
 
 
     public void playGame() {
         welcome();
         playerQuestions();
-        dealer.dealCards(player);
-        hand.scoreHand();
+        initialDeal();
+        showHand();
         finalResults();
         goodBye();
     }
@@ -57,8 +57,18 @@ public class BlackJackController {
                 finished = true;
             }
         }
-//        goodBye();
     }
+
+    public void initialDeal(){
+        dealer.dealCards();
+    }
+
+    public void showHand() {
+        dealer.showHands();
+    }
+
+
+
 
 /*    private void hitMeOrStand() {
         clear();

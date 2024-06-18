@@ -9,7 +9,7 @@ public class Player {
 
     private String name;
     private Integer cardScore;
-    private Hand hand = new Hand();
+//    private Hand hand = new Hand();
 //    public List<Card> myCards = new ArrayList<>();
 
     public Player(){
@@ -25,8 +25,12 @@ public class Player {
 
     }
 
-    public void dealCards(Player player){
-        hand.addCards();
+//    public void dealCards(Player player){
+//        hand.addCards();
+//    }
+
+    public String getName() {
+        return name;
     }
 
 //    public List<Card> checkCards(){
