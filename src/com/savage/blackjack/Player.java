@@ -1,12 +1,16 @@
 package com.savage.blackjack;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-class Player {
+public class Player {
+    public static final Integer BLACK_JACK_NUM = 21;
+
     private String name;
     private Integer cardScore;
-    private Map<String, Integer> myCards = new HashMap();
+    public List<Card> myCards = new ArrayList<>();
 
     public Player(){
     }
@@ -17,13 +21,44 @@ class Player {
 
     public PlayerResponse responseToDealer(){
         return PlayerResponse.HIT_ME;
+
+
     }
 
-    public Map<String, Integer> checkCards(){
+    public List<Card> checkCards(){
         return myCards;
     }
 
     public boolean hasBlackJack(){
-        return false;
+        boolean result = false;
+        int sum = 0;
+        for(Card card : myCards){
+            sum += card.getValue();
+        }
+
+        if(sum == BLACK_JACK_NUM){
+            result = true;
+        }
+        return result;
     }
+
+    public void scoreHand(){
+
+        for (Card card : myCards){
+            System.out.println(card.getValue());
+        }
+
+        // iterate through myCards and show current player hand
+    }
+
+    public String toString() {
+        return "name= " + name + "cards= " + myCards;
+    }
+
+    public void dump(){
+        for(Card item : myCards){
+            System.out.println(item.toString());
+        }
+    }
+
 }

@@ -60,7 +60,8 @@ public enum Card {
         this.value = value;
     }
 
-    public int value() {
-        return value;
+    player-iteration-2
+      public int getValue() {
+
     }
 }
