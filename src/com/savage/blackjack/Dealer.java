@@ -41,7 +41,7 @@ public class Dealer extends Player{
 
         return cards;
     }
-
+//
 //    public Card giveNextCard() { // *Dai* - I added this method for the hit or stand
 //        if (deck.isEmpty()) {
 //            throw new IllegalStateException("Deck is empty, cannot deal anymore cards");
