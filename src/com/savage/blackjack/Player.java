@@ -1,60 +1,79 @@
 package com.savage.blackjack;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.Scanner;
 
 public class Player {
 
     private String name;
     private Integer cardScore;
-//    private Hand hand = new Hand();
+    private Hand hand;
+    private Scanner scanner;
+
 //    public List<Card> myCards = new ArrayList<>();
 
     public Player(){
+        hand = new Hand();
+        scanner = new Scanner(System.in);
     }
 
     public Player(String name){
         this.name = name;
+        hand = new Hand();
     }
 
     public PlayerResponse responseToDealer(){
         return PlayerResponse.HIT_ME;
-
-
     }
 
-//    public void dealCards(Player player){
-//        hand.addCards();
-//    }
 
     public String getName() {
         return name;
     }
 
-//    public List<Card> checkCards(){
-//        return myCards;
-//    }
 
-/*    public boolean hasBlackJack(){
-        boolean result = false;
-        int sum = 0;
-        for(Card card : myCards){
-            sum += card.getValue();
-        }
+    public List<Card> checkCards(){
+        return hand.getCards();
+    }
 
-        if(sum == BLACK_JACK_NUM){
-            result = true;
+    public void addCard(Card card){ // *Dai* - I added this method
+        hand.addCard(card);
+    }
+
+    public boolean hasBlackJack(){
+        return hand.hasBlackjack();
+    }
+
+
+    public boolean isBust(){
+        return hand.handIsBust();
+    }
+
+    public void scoreHand() { // *Dai* - I added this method
+        hand.scoreHand();
+    }
+
+    public void playerTurn(Dealer dealer) { // *Dai* - I added this method
+        boolean playing = true;
+        while (playing) {
+            System.out.printf("%s's hand %s/n", getName(), hand.handValue());
+            System.out.println("Would you like to 'Hit' or 'Stand'?");
+            String decision = scanner.nextLine().trim().toLowerCase();
+            if (decision.equals("hit")) {
+                addCard(dealer.giveCard());
+                if (hand.scoreHand() > 21) {
+                    System.out.printf("You Bust! %s Your Cards Exceed 21.", getName());
+                    playing = false;
+                }
+            } else {
+                System.out.println("Invalid Choice. Please enter 'Hit' or 'Stand'.");
+            }
         }
-        return result;
-    }*/
+    }
+
 
 //    public void scoreHand(){
-//        for (Card card : myCards){
-//            System.out.println(card.getValue());
-//        }
-//
+//        System.out.println(hand);
 //        // iterate through myCards and show current player hand
 //    }
 
@@ -62,10 +81,8 @@ public class Player {
         return "name= " + name + "cards= ";
     }
 
-//    public void dump(){
-//        for(Card item : myCards){
-//            System.out.println(item.toString());
-//        }
-//    }
+    public void dump(){
+            System.out.println(hand);
+    }
 
 }
