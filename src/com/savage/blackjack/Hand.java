@@ -16,6 +16,8 @@ public class Hand {
 
     public void addCard(Card card) {
         hand.add(card);
+//        hand.add(Card.ACE_HEARTS);
+//        hand.add(Card.JACK_CLUBS);
     }
 
     public int handValue() {
@@ -43,20 +45,21 @@ public class Hand {
 
     public void scoreHand() {
         for (Card card : hand) {
-            List<String> imagelines = card.getImageLines();
+//            List<String> imagelines = card.getImageLines();
             System.out.print(card.getImageContent());
         }
     }
 
-//    public int getCardValue(){
-//        int sum = 0;
-//        for(Card card : hand){
-//
-//        }
-//    }
 
     public boolean hasBlackjack() {
-        return hand.size() == 2 && handValue() == 21;
+        boolean result = false;
+        if (hand.size() == 2 && handValue() == 21){
+            result = true;
+        }
+        else if (hand.size() > 2 && handValue() == 21){
+            result = false;
+        }
+        return result;
     }
 
     public List<Card> getHand() {
