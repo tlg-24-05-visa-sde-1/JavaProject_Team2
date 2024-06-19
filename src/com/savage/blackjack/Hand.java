@@ -4,20 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Hand {
-    public static final Integer BLACK_JACK_NUM = 21;
-
     private List<Card> cards;
 
     public Hand(){
         cards = new ArrayList<>();
     }
 
-
-    public void addCards() {
+    public void addCard(Card card) {
         // Get 2 shuffled cards from CardEnum and add them to myCards
         // List in Player and dealerCards
-        cards.add(Card.ACE_HEARTS);
-        cards.add(Card.TEN_DIAMONDS);
+        cards.add(card);
     }
 
     public int handValue(){
@@ -25,9 +21,11 @@ public class Hand {
         int aces = 0;
         for (Card card : cards) {
             value += card.getValue();
+            // this logic helps us create the value for aces. If the cards value is 11, it's automatically an ace since only ace can have a value of 11.
             if (card.getValue() == 11){
                 aces++;// increments count of aces
             }
+            // we need logic to subtract 10 from the hand if there is an ace if the value of our hand is over 21
             while ( value > 21 && aces > 0 ) {
                 value -= 10;
                 aces--; // decreases count of aces
@@ -36,6 +34,7 @@ public class Hand {
         return value;
     }
 
+    // after you create a method for the hand value, you can write more conditional statements to determine blackjack or bust
     boolean handIsBust(){
         return handValue() > 21;
     }
@@ -44,28 +43,9 @@ public class Hand {
         return cards.size() == 2 && handValue() == 21;
     }
 
- //   public int scoreHand(){ // *Dai* - I added this scoreHand information to work with the hit or stand method in player
-//        int score = 0;
-//        int aceCount = 0;
-//        for (Card card : cards){
-//            if(card.getValue() == 11) {
-//                aceCount++;
-//            }
-//        }
-//        while (score > BLACK_JACK_NUM && aceCount > 0){
-//            score -= 10;
-//            aceCount--;
-//        }
-//        // iterate through myCards and show current player hand
-//        return score;
-//        return scoreHand();
-//    }
- public void scoreHand(){
-     for (Card card : cards){
-         System.out.println(card.getValue());
-     }
-     // iterate through myCards and show current player hand
- }
+    public int scoreHand(){ // *Dai* - I added this scoreHand information to work with the hit or stand method in player
+        return handValue();
+    }
 
     public List<Card> getCards() {
         return cards;
