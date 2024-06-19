@@ -15,17 +15,23 @@ import static com.apps.util.Console.pause;
 public class BlackJackController {
     private final Prompter prompter = new Prompter(new Scanner(System.in));
     private final Dealer dealer = new Dealer();
+    private boolean gameInProgress = true;
 
 
 
     public void playGame() {
         welcome();
         gameQuestions();
-        initialDeal();
-        showHand();
-        anyBlackJack();
-        finalResults();
-        goodBye();
+        while (gameInProgress) {
+            initialDeal();
+            showHand();
+            playerGo();
+            dealerGo();
+            anyBlackJack();
+            finalResults();
+            playAgain();
+            goodBye();
+        }
     }
 
     public void welcome(){
@@ -41,7 +47,7 @@ public class BlackJackController {
     }
 
     public void gameQuestions(){
-        clear();
+//        clear();
 
         boolean finished = false;
         while (!finished){
@@ -64,8 +70,68 @@ public class BlackJackController {
         dealer.showHands();
     }
 
-    public void anyBlackJack() {
+    public void playerGo() {
+        for(String playerName: dealer.getPlayerNames()) {
+            boolean gameOn = true;
+            while (gameOn && dealer.playerContinueGame(playerName)) {
+                clear();
+//                showHand();
+                String answer = prompter.prompt(playerName + ", Would you like to 'Hit' or 'Stand': "
+                ).trim().toLowerCase();
+                switch (answer) {
+                    case "hit" -> dealer.giveNextPlayerCard(playerName);
+                    case "stand" -> gameOn = false;
+                    default -> System.out.printf("Invalid choice. Please type 'Hit' or 'Stand'.");
+                }
+            }
+        }
 
+        /*boolean noInitialBlackJack = true;
+        while(true){
+            dealer.giveNextCard();
+            dealer.showHands();
+            noInitialBlackJack = false;
+            return noInitialBlackJack;
+        }*/
+
+    }
+
+    public void dealerGo() {
+        while(dealer.dealerContinueGame()) {
+            dealer.giveNextDealerCard();
+        }
+        showHand();
+    }
+
+    public void playAgain() {
+        String answer = prompter.prompt("Do you want to play again? 'Yes' or 'No': "
+                ).trim().toLowerCase();
+        if("no".equals(answer)) {
+            gameInProgress = false;
+            clear();
+            goodBye();
+        }
+        else if ("yes".equals(answer)) {
+            dealer.resetHands();
+            gameQuestions();
+        }
+        else {
+            System.out.printf("Please enter 'Yes' or 'No': ");
+        }
+    }
+
+    public void anyBlackJack() {
+        for(var entry: dealer.getPlayerHands().entrySet()) {
+            var player = entry.getKey();
+            var hand = entry.getValue();
+//            if(!hand.hasBlackjack()) {
+//                System.out.println(player.getName() + " has Blackjack!");
+//            }
+        }
+
+//        if (!dealer.getDealerHand().hasBlackjack()){
+//            System.out.printf("Dealer has Blackjack");
+//        }
     }
 
 
@@ -91,11 +157,12 @@ public class BlackJackController {
 
 
     public void finalResults(){
-
+        dealer.showResults();
     }
 
     public void goodBye(){
-
+        clear();
+        System.out.println("Thanks for playing Savage BlackJack");
     }
 
 

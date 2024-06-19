@@ -48,19 +48,25 @@ public class Dealer extends Player{
         return deck.remove(deck.size() - 1);
     }
 
-    public List<Integer> giveCard(){
+/*    public List<Integer> giveCard(){
         List<Integer > cards = null;
         // Get a single card from CardEnum, perhaps next card and add to
         // myCards list in Player
 
         return cards;
+    }*/
+
+    public void giveNextPlayerCard(String playerName) { // *Dai* - I added this method for the hit or stand
+        Player player = players.stream().filter(p -> p.getName().equals(playerName)).findFirst().orElse(null);
+        if(player != null){
+            Hand hand = playerHands.get(player);
+            hand.addCard(drawCard());
+
+        }
     }
 
-    public Card giveNextCard() { // *Dai* - I added this method for the hit or stand
-        if (deck.isEmpty()) {
-            throw new IllegalStateException("Deck is empty, cannot deal anymore cards");
-        }
-        return deck.remove(0);
+    public void giveNextDealerCard() {
+        dealerHand.addCard(drawCard());
     }
 
 
@@ -70,7 +76,7 @@ public class Dealer extends Player{
             playerHands.get(player).scoreHand();
 
             if (playerHands.get(player).hasBlackjack()) {
-                System.out.println(player.getName()+ " Has Blackjack");
+                System.out.println(player.getName()+ " has Blackjack");
             }
 //            else if (playerHands.get(player).isBusted()) {
 //                System.out.println(player.getName() + "is Bust");
@@ -90,7 +96,63 @@ public class Dealer extends Player{
 //            System.out.println(" Dealer is Bust");}
     }
 
+    public Map<Player, Hand> getPlayerHands() {
+        return playerHands;
+    }
 
+    public Hand getDealerHand() {
+        return dealerHand;
+    }
+
+    public List<String> getPlayerNames(){
+        List<String> nameList = new ArrayList<>();
+        for(Player player : players){
+            nameList.add(player.getName());
+        }
+        return nameList;
+    }
+
+    public boolean playerContinueGame(String playerName) {
+        Player player = players.stream().filter(p -> p.getName().equals(playerName))
+                .findFirst().orElse(null);
+        if (player != null) {
+            Hand playerHand = playerHands.get(player);
+            return playerHand.handValue() < 21;
+        }
+        return false;
+    }
+
+    public boolean dealerContinueGame(){
+        return dealerHand.handValue() < 17 && !dealerHand.isBusted();
+    }
+
+    public void resetHands() {
+        dealerHand = new Hand();
+        playerHands.clear();
+        players.clear();
+        deck.clear();
+        shuffleCards();
+
+    }
+
+    public void showResults() {
+        for(Player player : players){
+            Hand playerHand = playerHands.get(player);
+            if (playerHand.isBusted()) {
+                System.out.println(player.getName() + " busted with a total score " + playerHand.handValue());
+            } else if (dealerHand.isBusted()){
+                // do i have to iterate and check player with highest value
+                System.out.println(player.getName() + " wins with " + playerHand.handValue() + " points. Dealer busted with"
+                + dealerHand.handValue() + "points");
+            } else if (playerHand.handValue() > dealerHand.handValue()) {
+                System.out.println(player.getName() + " wins with " + playerHand.handValue() + " points.");
+            } else if (playerHand.handValue() < dealerHand.handValue()) {
+                System.out.println(player.getName() + " losses with " + playerHand.handValue() + " points.");
+            } else {
+                System.out.println(player.getName() + " ties with the dealer with " + playerHand.handValue());
+            }
+        }
+    }
     public String toString() {
         return "name= " + name;
     }

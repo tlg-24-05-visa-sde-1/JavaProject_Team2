@@ -53,7 +53,7 @@ public class Player {
         hand.scoreHand();
     }
 
-    public void playerTurn(Dealer dealer) { // *Dai* - I added this method
+    /*public void playerTurn(Dealer dealer) { // *Dai* - I added this method
         boolean playing = true;
         while (playing) {
             System.out.printf("%s's hand %s/n", getName(), hand.handValue());
@@ -69,7 +69,7 @@ public class Player {
                 System.out.println("Invalid Choice. Please enter 'Hit' or 'Stand'.");
             }
         }
-    }
+    }*/
 
 
 //    public void scoreHand(){
