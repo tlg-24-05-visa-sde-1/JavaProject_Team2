@@ -3,6 +3,7 @@ package com.savage.blackjack;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
@@ -60,6 +61,8 @@ public enum Card {
     QUEEN_DIAMONDS(10, "resources/diamonds/queen_of_diamonds.txt"),
     KING_DIAMONDS(10, "resources/diamonds/king_of_diamonds.txt"),;
 
+    private static final String imageDir = "cardImages";
+
     private final int value;
     private final String image;
     private List<String> imageLines;
@@ -68,7 +71,7 @@ public enum Card {
         this.value = value;
         this.image = image;
         try{
-            imageLines = Files.readAllLines(Paths.get(image));
+            imageLines = Files.readAllLines(Path.of(image));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -87,23 +90,35 @@ public enum Card {
     }
 
     public String getImageContent() {
-/*        try{
+        StringBuilder content = new StringBuilder();
+        for (String line : imageLines) {
+            content.append(line).append("\n");
+        }
+        return content.toString();
+    }
+
+/*    public String getImageContent() {
+        try{
             return new String(Files.readAllBytes(Paths.get(image)));
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return "Error reading image";*/
+        return "Error reading image";*//*
 
         try{
             List<String> lines = Files.readAllLines(Paths.get(image));
+            StringBuilder content = new StringBuilder();
+            for (String line : imageLines) {
+                content.append(line).append("\n");
 
             for (String line : lines) {
                 String trimLine = line.trim();
                 System.out.println(trimLine);
+            }*//*
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
         return "";
-    }
+    }*/
 }
