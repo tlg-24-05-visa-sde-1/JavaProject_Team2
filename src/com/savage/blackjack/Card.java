@@ -1,8 +1,10 @@
 package com.savage.blackjack;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.List;
 
 public enum Card {
     ACE_SPADES(11, "resources/spades/ace_of_spades.txt"),
@@ -75,11 +77,23 @@ public enum Card {
     }
 
     public String getImageContent() {
-        try{
+/*        try{
             return new String(Files.readAllBytes(Paths.get(image)));
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return "Error reading image";
+        return "Error reading image";*/
+
+        try{
+            List<String> lines = Files.readAllLines(Paths.get(image), StandardCharsets.UTF_8);
+
+            for (String line : lines) {
+                String trimLine = line.trim();
+                System.out.println(trimLine);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "";
     }
 }
