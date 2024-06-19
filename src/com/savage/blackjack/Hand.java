@@ -4,16 +4,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Hand {
+
     private List<Card> cards;
+
 
     public Hand(){
         cards = new ArrayList<>();
     }
 
+
+    public Hand(Dealer dealer){
+        this.dealer = dealer;
+    }
+
+
+    public void addCard(Card card) {
+      hand.add(card);
+
+
     public void addCard(Card card) {
         // Get 2 shuffled cards from CardEnum and add them to myCards
         // List in Player and dealerCards
         cards.add(card);
+
     }
 
     public int handValue(){
@@ -39,6 +52,18 @@ public class Hand {
         return handValue() > 21;
     }
 
+
+    public boolean isBusted() {
+        return true;
+    }
+
+    public void scoreHand(){
+        for (Card card : hand){
+            System.out.print(card.getValue());
+            System.out.print(card.getImageContent());
+        }
+        // iterate through myCards and show current player hand
+
     public boolean hasBlackjack() {
         return cards.size() == 2 && handValue() == 21;
     }
@@ -49,6 +74,7 @@ public class Hand {
 
     public List<Card> getCards() {
         return cards;
+
     }
 
     public String toString(){

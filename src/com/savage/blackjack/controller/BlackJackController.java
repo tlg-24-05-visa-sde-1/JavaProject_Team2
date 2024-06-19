@@ -2,8 +2,6 @@ package com.savage.blackjack.controller;
 
 import com.apps.util.Prompter;
 import com.savage.blackjack.Dealer;
-import com.savage.blackjack.Hand;
-import com.savage.blackjack.Player;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -15,18 +13,17 @@ import static com.apps.util.Console.pause;
 
 
 public class BlackJackController {
-    //    private String playerName;
     private final Prompter prompter = new Prompter(new Scanner(System.in));
     private final Dealer dealer = new Dealer();
-//    private final Player player = new Player();
-//    private final Hand hand = new Hand();
+
 
 
     public void playGame() {
         welcome();
-        playerQuestions();
+        gameQuestions();
         initialDeal();
         showHand();
+        anyBlackJack();
         finalResults();
         goodBye();
     }
@@ -43,7 +40,7 @@ public class BlackJackController {
         }
     }
 
-    public void playerQuestions(){
+    public void gameQuestions(){
         clear();
 
         boolean finished = false;
@@ -67,6 +64,10 @@ public class BlackJackController {
         dealer.showHands();
     }
 
+    public void anyBlackJack() {
+
+    }
+
 
 
 
@@ -86,26 +87,6 @@ public class BlackJackController {
         }
     }*/
 
-/*    public void beginGame() {
-        // might need to be in a while loop
-        boolean gameIsOn = true;
-
-
-
-            //        player.hasBlackJack();  // not sure if we need to call before if statement
-            //        dealer.hasBlackJack();
-
-            if (player.hasBlackJack() || dealer.hasBlackJack()) {
-                finalResults();
-                goodBye();
-                break;
-            }
-
-            gameIsOn = false;
-
-            hitMeOrStand();
-
-     }*/
 
 
 
