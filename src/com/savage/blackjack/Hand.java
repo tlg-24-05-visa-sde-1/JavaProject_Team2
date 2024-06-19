@@ -43,8 +43,8 @@ public class Hand {
 
     public void scoreHand() {
         for (Card card : hand) {
-            List<String> imagelines = card.getImageLines();
             System.out.print(card.getImageContent());
+            List<String> imagelines = card.getImageLines();
         }
     }
 
