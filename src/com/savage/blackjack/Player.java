@@ -33,7 +33,7 @@ public class Player {
 
 
     public List<Card> checkCards(){
-        return hand.getCards();
+        return hand.getHand();
     }
 
     public void addCard(Card card){ // *Dai* - I added this method
@@ -46,7 +46,7 @@ public class Player {
 
 
     public boolean isBust(){
-        return hand.handIsBust();
+        return hand.isBusted();
     }
 
     public void scoreHand() { // *Dai* - I added this method
@@ -60,8 +60,8 @@ public class Player {
             System.out.println("Would you like to 'Hit' or 'Stand'?");
             String decision = scanner.nextLine().trim().toLowerCase();
             if (decision.equals("hit")) {
-                addCard(dealer.giveCard());
-                if (hand.scoreHand() > 21) {
+                addCard(dealer.giveNextCard());
+                if (hand.handValue() > 21) {
                     System.out.printf("You Bust! %s Your Cards Exceed 21.", getName());
                     playing = false;
                 }
