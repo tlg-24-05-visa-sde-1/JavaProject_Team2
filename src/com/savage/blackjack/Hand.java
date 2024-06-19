@@ -42,18 +42,19 @@ public class Hand {
     }
 
     public void scoreHand() {
-        for (Card card : hand) {
-            List<String> imagelines = card.getImageLines();
-            System.out.print(card.getImageContent());
+        StringBuilder output = new StringBuilder();
+
+        for (int i = 0; i < 6; i++) {
+            StringBuilder line = new StringBuilder();
+            for (Card card : hand) {
+                line.append(card.getImageLines().get(i)).append(" ");
+            }
+            line.append("\n");
+            output.append(line);
         }
+        System.out.println(output);
     }
 
-//    public int getCardValue(){
-//        int sum = 0;
-//        for(Card card : hand){
-//
-//        }
-//    }
 
     public boolean hasBlackjack() {
         return hand.size() == 2 && handValue() == 21;
