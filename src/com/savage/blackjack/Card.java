@@ -62,10 +62,16 @@ public enum Card {
 
     private final int value;
     private final String image;
+    private List<String> imageLines;
 
     Card(int value, String image) {
         this.value = value;
         this.image = image;
+        try{
+            imageLines = Files.readAllLines(Paths.get(image));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
       public int getValue() {
@@ -74,6 +80,10 @@ public enum Card {
 
     public String getImage() {
         return image;
+    }
+
+    public List<String> getImageLines(){
+        return imageLines;
     }
 
     public String getImageContent() {
@@ -85,7 +95,7 @@ public enum Card {
         return "Error reading image";*/
 
         try{
-            List<String> lines = Files.readAllLines(Paths.get(image), StandardCharsets.UTF_8);
+            List<String> lines = Files.readAllLines(Paths.get(image));
 
             for (String line : lines) {
                 String trimLine = line.trim();
