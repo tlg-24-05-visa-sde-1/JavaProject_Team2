@@ -34,8 +34,11 @@ public class HandTest {
         hand.addCard(Card.ACE_HEARTS);
         hand.addCard(Card.TEN_CLUBS);
         assertTrue(hand.hasBlackjack());
+        
+    }
 
-        hand = new Hand();
+    @Test
+    public void testHandIsNotBlackJack() {
         hand.addCard(Card.TEN_HEARTS);
         hand.addCard(Card.SEVEN_CLUBS);
         assertFalse(hand.hasBlackjack());
@@ -53,10 +56,12 @@ public class HandTest {
         hand.addCard(Card.TEN_CLUBS);
         hand.addCard(Card.EIGHT_CLUBS);
         assertTrue(hand.isBusted());
+    }
 
-        hand = new Hand();
-        hand.addCard(Card.KING_HEARTS);
-        hand.addCard(Card.KING_CLUBS);
+    @Test
+    public void testHandIsNotBust() {
+        hand.addCard(Card.TEN_HEARTS);
+        hand.addCard(Card.TEN_CLUBS);
         assertFalse(hand.isBusted());
     }
 }
