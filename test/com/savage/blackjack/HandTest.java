@@ -1,5 +1,6 @@
 package com.savage.blackjack;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -19,7 +20,6 @@ public class HandTest {
         assertEquals(21, hand.handValue());
         System.out.println("The hand value is: " + hand.handValue());
 
-
         hand = new Hand();
         hand.addCard(Card.ACE_HEARTS);
         hand.addCard(Card.TEN_CLUBS);
@@ -30,11 +30,46 @@ public class HandTest {
     }
 
     @Test
+    public void testHandValueHasThreeAces() {
+        hand.addCard(Card.ACE_HEARTS);
+        hand.addCard(Card.ACE_CLUBS);
+        hand.addCard(Card.ACE_DIAMONDS);
+        assertEquals(13, hand.handValue());
+        System.out.println("The hand value is: " + hand.handValue());
+
+        hand = new Hand();
+        hand.addCard(Card.ACE_HEARTS);
+        hand.addCard(Card.ACE_CLUBS);
+        hand.addCard(Card.ACE_DIAMONDS);
+        hand.addCard(Card.EIGHT_CLUBS);
+        assertEquals(21, hand.handValue());
+        System.out.println("The hand value is: " + hand.handValue());
+    }
+
+    @Test
+    public void testHandValueHasFourAces(){
+        hand.addCard(Card.ACE_HEARTS);
+        hand.addCard(Card.ACE_CLUBS);
+        hand.addCard(Card.ACE_DIAMONDS);
+        hand.addCard(Card.ACE_SPADES);
+        assertEquals(14, hand.handValue());
+        System.out.println("The hand value is: " + hand.handValue());
+
+        hand = new Hand();
+        hand.addCard(Card.ACE_HEARTS);
+        hand.addCard(Card.ACE_CLUBS);
+        hand.addCard(Card.ACE_DIAMONDS);
+        hand.addCard(Card.ACE_SPADES);
+        hand.addCard(Card.TWO_CLUBS);
+        assertEquals(16, hand.handValue());
+        System.out.println("The hand value is: " + hand.handValue());
+    }
+
+    @Test
     public void testHandIsBlackJack() {
         hand.addCard(Card.ACE_HEARTS);
         hand.addCard(Card.TEN_CLUBS);
         assertTrue(hand.hasBlackjack());
-        
     }
 
     @Test
