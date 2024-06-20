@@ -2,6 +2,7 @@ package com.savage.blackjack.controller;
 
 import com.apps.util.Prompter;
 import com.savage.blackjack.Dealer;
+import com.savage.blackjack.Player;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -24,6 +25,12 @@ public class BlackJackController {
         gameQuestions();
         while (gameInProgress) {
             initialDeal();
+            if (dealer.getPlayerHands().size() == 1 && checkForInitialBlackJack()) {
+                showHand();
+                finalResults();
+                playAgain();
+                continue;
+            }
             showHand();
             playerGo();
             dealerGo();
@@ -104,6 +111,34 @@ public class BlackJackController {
             dealer.giveNextDealerCard();
         }
 //        showHand();
+    }
+
+    public boolean checkForInitialBlackJack() {
+        boolean dealerHasBlackJack = dealer.getDealerHand().hasBlackjack();
+        boolean playerHasBlackJack = false;
+        Player playerWithBlackJack = null;
+
+        for (var entry : dealer.getPlayerHands().entrySet()) {
+            var player = entry.getKey();
+            var hand = entry.getValue();
+            if (hand.hasBlackjack()) {
+                playerHasBlackJack = true;
+                playerWithBlackJack = player;
+            }
+        }
+
+        if (dealerHasBlackJack || playerHasBlackJack) {
+            System.out.println("Initial BlackJack check results");
+            if (playerHasBlackJack && !dealerHasBlackJack){
+                System.out.println(playerWithBlackJack.getName() + " has BlackJack and wins!");
+            } else if (!playerHasBlackJack && dealerHasBlackJack) {
+                System.out.println("Dealer has Blackjack and wins!");
+            } else if (playerHasBlackJack && dealerHasBlackJack) {
+                System.out.println(playerWithBlackJack.getName() + " ties with the dealer with Blackjack!");
+            }
+            return true;
+        }
+        return false;
     }
 
     public void playAgain() {
