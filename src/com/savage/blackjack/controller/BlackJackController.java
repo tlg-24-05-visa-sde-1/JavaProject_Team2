@@ -81,7 +81,7 @@ public class BlackJackController {
         for(String playerName: dealer.getPlayerNames()) {
             boolean gameOn = true;
             while (gameOn && dealer.playerContinueGame(playerName)) {
-                clear();
+//                clear();
  //              dealer.showHands();
                 String answer = prompter.prompt(playerName + ", Would you like to 'Hit' or 'Stand': "
                 ).trim().toLowerCase();

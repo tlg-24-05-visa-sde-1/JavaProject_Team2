@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Hand {
-    private List<Card> hand = new ArrayList<>();
+    private List<Card> Cards = new ArrayList<>();
     private Dealer dealer ;
 
     public Hand(){
@@ -15,16 +15,17 @@ public class Hand {
     }
 
     public void addCard(Card card) {
-        hand.add(card);
+        Cards.add(card);
 //        hand.add(Card.ACE_HEARTS);
 //        hand.add(Card.JACK_CLUBS);
     }
+
 
     public int handValue() {
         int value = 0;
         int aces = 0;
 
-        for (Card card : hand) {
+        for (Card card : Cards) {
             value += card.getValue();
             if (card.getValue() == 11) {
                 aces++;
@@ -48,7 +49,7 @@ public class Hand {
 
         for (int i = 0; i < 6; i++) {
             StringBuilder line = new StringBuilder();
-            for (Card card : hand) {
+            for (Card card : Cards) {
                 line.append(card.getImageLines().get(i)).append(" ");
             }
             line.append("\n");
@@ -60,23 +61,23 @@ public class Hand {
 
     public boolean hasBlackjack() {
         boolean result = false;
-        if (hand.size() == 2 && handValue() == 21){
+        if (Cards.size() == 2 && handValue() == 21){
             result = true;
         }
-        else if (hand.size() > 2 && handValue() == 21){
+        else if (Cards.size() > 2 && handValue() == 21){
             result = false;
         }
         return result;
     }
 
-    public List<Card> getHand() {
-        return hand;
+    public List<Card> getCards() {
+        return Cards;
     }
 
     @Override
     public String toString() {
         StringBuilder output = new StringBuilder();
-        for (Card card : hand) {
+        for (Card card : Cards) {
             output.append(card.getValue()).append(" ");
         }
         return output.toString();

@@ -33,7 +33,7 @@ public class Player {
 
 
     public List<Card> checkCards(){
-        return hand.getHand();
+        return hand.getCards();
     }
 
     public void addCard(Card card){ // *Dai* - I added this method
