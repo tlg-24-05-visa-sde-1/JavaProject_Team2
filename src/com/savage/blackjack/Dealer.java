@@ -127,25 +127,28 @@ public class Dealer extends Player{
     public void showResults() {
         for(Player player : players){
             Hand playerHand = playerHands.get(player);
-            if (playerHand.isBusted()) {
-                System.out.printf("%s busted with a %s card score.\n", player.getName(), playerHand.handValue());
-                System.out.printf("Dealer beats %s with a %s card score.\n", player.getName(), dealerHand.handValue());
+            if (playerHand.isBusted() && !dealerHand.isBusted()) {
+                System.out.printf("%s has BUSTED with a %s card score and LOST their hand to the Dealer.\n", player.getName(), playerHand.handValue());
+                System.out.printf("The Dealer has BEAT %s and WON this hand with a %s card score.\n", player.getName(), dealerHand.handValue());
                 System.out.println();
-            } else if (dealerHand.isBusted()){
+            } else if (dealerHand.isBusted() && !playerHand.isBusted()) {
                 // do i have to iterate and check player with highest value
-                System.out.printf("%s beats the Dealer with a %s card score.\n", player.getName(), playerHand.handValue());
-                System.out.printf("Dealer busted with a %s card score.\n", dealerHand.handValue());
+                System.out.printf("%s has BEAT the Dealer and WON their hand with a %s card score.\n", player.getName(), playerHand.handValue());
+                System.out.printf("The Dealer BUSTED with a %s card score.\n", dealerHand.handValue());
+                System.out.println();
+            } else if (playerHand.isBusted() && dealerHand.isBusted()) {
+                System.out.printf("%s and Dealer has BUSTED, this hand is a DRAW!.\n", player.getName());
                 System.out.println();
             } else if (playerHand.handValue() > dealerHand.handValue()) {
-                System.out.printf("%s beats the Dealer with a %s card score.\n", player.getName(), playerHand.handValue());
-                System.out.printf("Dealer loses to %s with a %s card score.\n", player.getName(), dealerHand.handValue());
+                System.out.printf("%s has BEAT the Dealer and WON their hand with a %s card score.\n", player.getName(), playerHand.handValue());
+                System.out.printf("Dealer has LOST to %s with a %s card score.\n", player.getName(), dealerHand.handValue());
                 System.out.println();
             } else if (playerHand.handValue() < dealerHand.handValue()) {
-                System.out.printf("%s loses to the Dealer with a %s card score.\n", player.getName(), playerHand.handValue());
-                System.out.printf("Dealer beats %s with a %s card score.\n", player.getName(), dealerHand.handValue());
+                System.out.printf("%s has LOST their hand to the Dealer with a %s card score.\n", player.getName(), playerHand.handValue());
+                System.out.printf("The Dealer has BEAT %s and WON this hand with a %s card score.\n", player.getName(), dealerHand.handValue());
                 System.out.println();
             } else {
-                System.out.printf("%s has a card score of %s.\nThe Dealer also has a card score of %s.\n%s and Dealer has a Tie!.\n ",
+                System.out.printf("%s has a card score of %s.\nThe Dealer also has a card score of %s.\n%s and Dealer has a DRAW!.\n ",
                         player.getName(), playerHand.handValue(), dealerHand.handValue(), player.getName());
                 System.out.println();
             }
