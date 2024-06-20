@@ -146,12 +146,14 @@ public class Dealer extends Player{
                 System.out.println(player.getName() + " busted with a total score " + playerHand.handValue());
             } else if (dealerHand.isBusted()){
                 // do i have to iterate and check player with highest value
-                System.out.println(player.getName() + " wins with " + playerHand.handValue() + " points. Dealer busted with"
-                + dealerHand.handValue() + "points");
+                System.out.println(player.getName() + " wins with " + playerHand.handValue() + " points. Dealer busted with "
+                + dealerHand.handValue() + " points");
             } else if (playerHand.handValue() > dealerHand.handValue()) {
-                System.out.println(player.getName() + " wins with " + playerHand.handValue() + " points.");
+                System.out.println(player.getName() + " wins with " + playerHand.handValue() + " points. Dealer loses with "
+                + dealerHand.handValue());
             } else if (playerHand.handValue() < dealerHand.handValue()) {
-                System.out.println(player.getName() + " losses with " + playerHand.handValue() + " points.");
+                System.out.println(player.getName() + " losses with " + playerHand.handValue() + " points. Dealer wins with "
+                + dealerHand.handValue());
             } else {
                 System.out.println(player.getName() + " ties with the dealer with " + playerHand.handValue());
             }
