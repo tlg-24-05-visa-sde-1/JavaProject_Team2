@@ -79,7 +79,10 @@ public class BlackJackController {
                 String answer = prompter.prompt(playerName + ", Would you like to 'Hit' or 'Stand': "
                 ).trim().toLowerCase();
                 switch (answer) {
-                    case "hit" -> dealer.giveNextPlayerCard(playerName);
+                    case "hit" -> {
+                        dealer.giveNextPlayerCard(playerName);
+                        dealer.showHands();
+                    }
                     case "stand" -> gameOn = false;
                     default -> System.out.printf("Invalid choice. Please type 'Hit' or 'Stand'.");
                 }
@@ -100,7 +103,7 @@ public class BlackJackController {
         while(dealer.dealerContinueGame()) {
             dealer.giveNextDealerCard();
         }
-        showHand();
+//        showHand();
     }
 
     public void playAgain() {

@@ -61,8 +61,8 @@ public class Dealer extends Player{
         if(player != null){
             Hand hand = playerHands.get(player);
             hand.addCard(drawCard());
-
         }
+
     }
 
     public void giveNextDealerCard() {
@@ -123,7 +123,11 @@ public class Dealer extends Player{
     }
 
     public boolean dealerContinueGame(){
-        return dealerHand.handValue() < 17 && !dealerHand.isBusted();
+        for(Player player : players) {
+            if(!playerHands.get(player).hasBlackjack())
+                return dealerHand.handValue() < 17 && !dealerHand.isBusted();
+        }
+        return false;
     }
 
     public void resetHands() {
