@@ -59,7 +59,8 @@ public enum Card {
     TEN_DIAMONDS(10, "resources/diamonds/ten_of_diamonds.txt"),
     JACK_DIAMONDS(10, "resources/diamonds/jack_of_diamonds.txt"),
     QUEEN_DIAMONDS(10, "resources/diamonds/queen_of_diamonds.txt"),
-    KING_DIAMONDS(10, "resources/diamonds/king_of_diamonds.txt"),;
+    KING_DIAMONDS(10, "resources/diamonds/king_of_diamonds.txt"),
+    ;
 
     private static final String imageDir = "cardImages";
 
@@ -70,14 +71,14 @@ public enum Card {
     Card(int value, String image) {
         this.value = value;
         this.image = image;
-        try{
+        try {
             imageLines = Files.readAllLines(Path.of(image));
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-      public int getValue() {
+    public int getValue() {
         return value;
     }
 
@@ -85,7 +86,7 @@ public enum Card {
         return image;
     }
 
-    public List<String> getImageLines(){
+    public List<String> getImageLines() {
         return imageLines;
     }
 
@@ -96,29 +97,4 @@ public enum Card {
         }
         return content.toString();
     }
-
-/*    public String getImageContent() {
-        try{
-            return new String(Files.readAllBytes(Paths.get(image)));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return "Error reading image";*//*
-
-        try{
-            List<String> lines = Files.readAllLines(Paths.get(image));
-            StringBuilder content = new StringBuilder();
-            for (String line : imageLines) {
-                content.append(line).append("\n");
-
-            for (String line : lines) {
-                String trimLine = line.trim();
-                System.out.println(trimLine);
-            }*//*
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return "";
-    }*/
 }

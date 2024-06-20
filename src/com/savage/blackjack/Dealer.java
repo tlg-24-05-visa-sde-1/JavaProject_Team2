@@ -42,19 +42,10 @@ public class Dealer extends Player{
 
     public Card drawCard() {
         if (deck.isEmpty()) {
-            // throw exception
             System.out.println("The deck is empty");
         }
         return deck.remove(deck.size() - 1);
     }
-
-/*    public List<Integer> giveCard(){
-        List<Integer > cards = null;
-        // Get a single card from CardEnum, perhaps next card and add to
-        // myCards list in Player
-
-        return cards;
-    }*/
 
     public void giveNextPlayerCard(String playerName) { // *Dai* - I added this method for the hit or stand
         Player player = players.stream().filter(p -> p.getName().equals(playerName)).findFirst().orElse(null);
@@ -78,9 +69,6 @@ public class Dealer extends Player{
             if (playerHands.get(player).hasBlackjack()) {
                 System.out.println(player.getName()+ " has Blackjack");
             }
-//            else if (playerHands.get(player).isBusted()) {
-//                System.out.println(player.getName() + "is Bust");
-//            }
         }
 
         System.out.println("Dealer's hand:");
@@ -88,12 +76,6 @@ public class Dealer extends Player{
         if (dealerHand.hasBlackjack()){
             System.out.println("Dealer has Blackjack");
         }
-
-//        if(playerHands.get(player).hasBlackjack())
-
-
-//        else if (dealerHand.isBusted()) {
-//            System.out.println(" Dealer is Bust");}
     }
 
     public Map<Player, Hand> getPlayerHands() {
@@ -143,19 +125,21 @@ public class Dealer extends Player{
         for(Player player : players){
             Hand playerHand = playerHands.get(player);
             if (playerHand.isBusted()) {
-                System.out.println(player.getName() + " busted with a total score " + playerHand.handValue());
+                System.out.printf("%s busted with a %s card score.\n", player.getName(), playerHand.handValue());
+                System.out.printf("Dealer beats %s with a %s card score.\n", player.getName(), dealerHand.handValue());
             } else if (dealerHand.isBusted()){
                 // do i have to iterate and check player with highest value
-                System.out.println(player.getName() + " wins with " + playerHand.handValue() + " points. Dealer busted with "
-                + dealerHand.handValue() + " points");
+                System.out.printf("%s beats the Dealer with a %s card score.\n", player.getName(), playerHand.handValue());
+                System.out.printf("Dealer busted with a %s card score.\n", dealerHand.handValue());
             } else if (playerHand.handValue() > dealerHand.handValue()) {
-                System.out.println(player.getName() + " wins with " + playerHand.handValue() + " points. Dealer loses with "
-                + dealerHand.handValue());
+                System.out.printf("%s beats the Dealer with a %s card score.\n", player.getName(), playerHand.handValue());
+                System.out.printf("Dealer loses to %s with a %s card score.\n", player.getName(), dealerHand.handValue());
             } else if (playerHand.handValue() < dealerHand.handValue()) {
-                System.out.println(player.getName() + " losses with " + playerHand.handValue() + " points. Dealer wins with "
-                + dealerHand.handValue());
+                System.out.printf("%s loses to the Dealer with a %s card score.\n", player.getName(), playerHand.handValue());
+                System.out.printf("Dealer beats %s with a %s card score.\n", player.getName(), dealerHand.handValue());
             } else {
-                System.out.println(player.getName() + " ties with the dealer with " + playerHand.handValue());
+                System.out.printf("%s has a card score of %s.\n The Dealer also has a card score of %s.\n The Game is a Tie!.\n ",
+                        player.getName(), playerHand.handValue(), dealerHand.handValue());
             }
         }
     }
