@@ -121,7 +121,7 @@ public class BlackJackController {
         }
 
         if (dealerHasBlackJack || playerHasBlackJack) {
-            System.out.println("Initial BlackJack check results");
+            System.out.println();
             if (playerHasBlackJack && !dealerHasBlackJack) {
                 System.out.println(playerWithBlackJack.getName() + " has BlackJack and wins!");
             } else if (!playerHasBlackJack && dealerHasBlackJack) {
@@ -139,7 +139,6 @@ public class BlackJackController {
         boolean anyPlayerHasBlackJack = false;
 
         if (dealerHasBlackJack) {
-            System.out.println("Dealer has BlackJack");
             for (var entry : dealer.getPlayerHands().entrySet()) {
                 var player = entry.getKey();
                 var hand = entry.getValue();
@@ -149,7 +148,7 @@ public class BlackJackController {
                 }
             }
             if (!anyPlayerHasBlackJack) {
-                System.out.println("Dealer wins with BlackJack!");
+                System.out.println();
             }
             return true; // Game ends
         }

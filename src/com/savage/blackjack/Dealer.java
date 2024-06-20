@@ -77,7 +77,7 @@ public class Dealer extends Player{
         dealerHand.scoreHand();
 
         if (dealerHand.hasBlackjack()){
-            System.out.println("Dealer has Blackjack");
+            System.out.println("Dealer wins with BlackJack!");
         }
     }
 
@@ -130,19 +130,24 @@ public class Dealer extends Player{
             if (playerHand.isBusted()) {
                 System.out.printf("%s busted with a %s card score.\n", player.getName(), playerHand.handValue());
                 System.out.printf("Dealer beats %s with a %s card score.\n", player.getName(), dealerHand.handValue());
+                System.out.println();
             } else if (dealerHand.isBusted()){
                 // do i have to iterate and check player with highest value
                 System.out.printf("%s beats the Dealer with a %s card score.\n", player.getName(), playerHand.handValue());
                 System.out.printf("Dealer busted with a %s card score.\n", dealerHand.handValue());
+                System.out.println();
             } else if (playerHand.handValue() > dealerHand.handValue()) {
                 System.out.printf("%s beats the Dealer with a %s card score.\n", player.getName(), playerHand.handValue());
                 System.out.printf("Dealer loses to %s with a %s card score.\n", player.getName(), dealerHand.handValue());
+                System.out.println();
             } else if (playerHand.handValue() < dealerHand.handValue()) {
                 System.out.printf("%s loses to the Dealer with a %s card score.\n", player.getName(), playerHand.handValue());
                 System.out.printf("Dealer beats %s with a %s card score.\n", player.getName(), dealerHand.handValue());
+                System.out.println();
             } else {
-                System.out.printf("%s has a card score of %s.\n The Dealer also has a card score of %s.\n %s and Dealer has a Tie!.\n ",
+                System.out.printf("%s has a card score of %s.\nThe Dealer also has a card score of %s.\n%s and Dealer has a Tie!.\n ",
                         player.getName(), playerHand.handValue(), dealerHand.handValue(), player.getName());
+                System.out.println();
             }
         }
     }
