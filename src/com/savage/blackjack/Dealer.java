@@ -25,15 +25,29 @@ public class Dealer extends Player{
     public void addPlayer(String name){
         Player player = new Player(name);
         players.add(player);
-        playerHands.put(player, new Hand(this));
+        Hand hand = new Hand(this);
+        playerHands.put(player, hand);
+
+        checkEasterEgg(player, hand);
+    }
+
+    private void checkEasterEgg(Player player, Hand hand) {
+        String name = player.getName();
+        if (name.equalsIgnoreCase("tomi") || name.equalsIgnoreCase("dai") || name.equalsIgnoreCase("gabe")) {
+            // Assign Blackjack cards (ACE and 10-value card)
+            hand.addCard(Card.ACE_SPADES);  // You can change to any ACE
+            hand.addCard(Card.KING_SPADES); // You can change to any 10-value card
+        }
     }
 
     public void dealCards(){
         shuffleCards();
         for(Player player : players){
             Hand hand = playerHands.get(player);
-            hand.addCard(drawCard());
-            hand.addCard(drawCard());
+            if (hand.getCards().isEmpty()) {
+                hand.addCard(drawCard());
+                hand.addCard(drawCard());
+            }
         }
         dealerHand.addCard(drawCard());
         dealerHand.addCard(drawCard());
