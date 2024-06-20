@@ -83,6 +83,7 @@ public class BlackJackController {
             boolean gameOn = true;
             while (gameOn && dealer.playerContinueGame(playerName)) {
                 clear();
+
                 String answer = prompter.prompt(playerName + ", Would you like to 'Hit' or 'Stand': "
                 ).trim().toLowerCase();
                 switch (answer) {

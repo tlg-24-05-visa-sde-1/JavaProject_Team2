@@ -26,7 +26,8 @@ public class Player {
     }
 
 
-    public List<Card> checkCards() {
+    public List<Card> checkCards(){
+
         return hand.getCards();
     }
 

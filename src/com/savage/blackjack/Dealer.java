@@ -63,7 +63,8 @@ public class Dealer extends Player{
 
     public void showHands() {
         for (Player player : players) {
-            System.out.println(player.getName() + "'s hand:");
+            System.out.println(player.getName() + "'s hand: "
+            + playerHands.get(player).handValue());
             playerHands.get(player).scoreHand();
 
             if (playerHands.get(player).hasBlackjack()) {
@@ -71,8 +72,10 @@ public class Dealer extends Player{
             }
         }
 
-        System.out.println("Dealer's hand:");
+        System.out.println("Dealer's hand: "
+        + dealerHand.handValue());
         dealerHand.scoreHand();
+
         if (dealerHand.hasBlackjack()){
             System.out.println("Dealer has Blackjack");
         }

@@ -16,7 +16,9 @@ public class Hand {
 
     public void addCard(Card card) {
         cards.add(card);
+
     }
+
 
     public int handValue() {
         int value = 0;
@@ -58,9 +60,10 @@ public class Hand {
 
     public boolean hasBlackjack() {
         boolean result = false;
-        if (cards.size() == 2 && handValue() == 21) {
+        if (cards.size() == 2 && handValue() == 21){
             result = true;
-        } else if (cards.size() > 2 && handValue() == 21) {
+        }
+        else if (cards.size() > 2 && handValue() == 21){
             result = false;
         }
         return result;
