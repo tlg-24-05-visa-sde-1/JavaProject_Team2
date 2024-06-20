@@ -75,11 +75,14 @@ public class BlackJackController {
             boolean gameOn = true;
             while (gameOn && dealer.playerContinueGame(playerName)) {
                 clear();
-//                showHand();
+ //              dealer.showHands();
                 String answer = prompter.prompt(playerName + ", Would you like to 'Hit' or 'Stand': "
                 ).trim().toLowerCase();
                 switch (answer) {
-                    case "hit" -> dealer.giveNextPlayerCard(playerName);
+                    case "hit" -> {
+                        dealer.giveNextPlayerCard(playerName);
+                        dealer.showHands();
+                    }
                     case "stand" -> gameOn = false;
                     default -> System.out.printf("Invalid choice. Please type 'Hit' or 'Stand'.");
                 }
