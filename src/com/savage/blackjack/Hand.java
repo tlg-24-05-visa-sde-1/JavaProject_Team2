@@ -16,9 +16,7 @@ public class Hand {
 
     public void addCard(Card card) {
         cards.add(card);
-
     }
-
 
     public int handValue() {
         int value = 0;
@@ -35,7 +33,6 @@ public class Hand {
             value -= 10;
             aces--;
         }
-
         return value;
     }
 
@@ -45,7 +42,6 @@ public class Hand {
 
     public void scoreHand() {
         StringBuilder output = new StringBuilder();
-
         for (int i = 0; i < 6; i++) {
             StringBuilder line = new StringBuilder();
             for (Card card : cards) {

@@ -39,7 +39,6 @@ public class BlackJackController {
             showHand();
             playerGo();
             dealerGo();
-            anyBlackJack();
             finalResults();
             playAgain();
             goodBye();
@@ -172,12 +171,12 @@ public class BlackJackController {
         }
     }
 
-    public void anyBlackJack() {
+/*    public void anyBlackJack() {
         for (var entry : dealer.getPlayerHands().entrySet()) {
             var player = entry.getKey();
             var hand = entry.getValue();
         }
-    }
+    }*/
 
     public void finalResults() {
         dealer.showResults();
