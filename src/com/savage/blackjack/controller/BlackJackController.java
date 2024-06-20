@@ -19,13 +19,18 @@ public class BlackJackController {
     private boolean gameInProgress = true;
 
 
-
     public void playGame() {
         welcome();
         gameQuestions();
         while (gameInProgress) {
             initialDeal();
             if (dealer.getPlayerHands().size() == 1 && checkForInitialBlackJack()) {
+                showHand();
+                finalResults();
+                playAgain();
+                continue;
+            }
+            if (checkDealerBlackJack()){
                 showHand();
                 finalResults();
                 playAgain();
@@ -41,35 +46,31 @@ public class BlackJackController {
         }
     }
 
-    public void welcome(){
+    public void welcome() {
         try {
             clear();
             String welcome = Files.readString(Path.of("resources/welcome"));
             System.out.println("\n" + welcome + "\n");
             pause(1000);
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void gameQuestions(){
-//        clear();
+    public void gameQuestions() {
 
         boolean finished = false;
-        while (!finished){
+        while (!finished) {
             String playerName = prompter.prompt("Please enter your name, then press [Enter] when done: ");
-            if(!playerName.trim().isEmpty()) {
+            if (!playerName.trim().isEmpty()) {
                 dealer.addPlayer(playerName);
-//                dealer.dump();
-            }
-            else {
+            } else {
                 finished = true;
             }
         }
     }
 
-    public void initialDeal(){
+    public void initialDeal() {
         dealer.dealCards();
     }
 
@@ -78,11 +79,11 @@ public class BlackJackController {
     }
 
     public void playerGo() {
-        for(String playerName: dealer.getPlayerNames()) {
+        for (String playerName : dealer.getPlayerNames()) {
             boolean gameOn = true;
             while (gameOn && dealer.playerContinueGame(playerName)) {
-//                clear();
- //              dealer.showHands();
+                clear();
+
                 String answer = prompter.prompt(playerName + ", Would you like to 'Hit' or 'Stand': "
                 ).trim().toLowerCase();
                 switch (answer) {
@@ -95,23 +96,13 @@ public class BlackJackController {
                 }
             }
         }
-
-        /*boolean noInitialBlackJack = true;
-        while(true){
-            dealer.giveNextCard();
-            dealer.showHands();
-            noInitialBlackJack = false;
-            return noInitialBlackJack;
-        }*/
-
     }
 
     public void dealerGo() {
-        while(dealer.dealerContinueGame()) {
+        while (dealer.dealerContinueGame()) {
             dealer.giveNextDealerCard();
             dealer.showHands();
         }
-//        showHand();
     }
 
     public boolean checkForInitialBlackJack() {
@@ -130,7 +121,7 @@ public class BlackJackController {
 
         if (dealerHasBlackJack || playerHasBlackJack) {
             System.out.println("Initial BlackJack check results");
-            if (playerHasBlackJack && !dealerHasBlackJack){
+            if (playerHasBlackJack && !dealerHasBlackJack) {
                 System.out.println(playerWithBlackJack.getName() + " has BlackJack and wins!");
             } else if (!playerHasBlackJack && dealerHasBlackJack) {
                 System.out.println("Dealer has Blackjack and wins!");
@@ -142,67 +133,56 @@ public class BlackJackController {
         return false;
     }
 
+    public boolean checkDealerBlackJack() {
+        boolean dealerHasBlackJack = dealer.getDealerHand().hasBlackjack();
+        boolean anyPlayerHasBlackJack = false;
+
+        if (dealerHasBlackJack) {
+            System.out.println("Dealer has BlackJack");
+            for (var entry : dealer.getPlayerHands().entrySet()) {
+                var player = entry.getKey();
+                var hand = entry.getValue();
+                if (hand.hasBlackjack()) {
+                    System.out.printf("%s and the Dealer both have BlackJack! They have a tie!", player.getName());
+                    anyPlayerHasBlackJack = true;
+                }
+            }
+            if (!anyPlayerHasBlackJack) {
+                System.out.println("Dealer wins with BlackJack!");
+            }
+            return true; // Game ends
+        }
+        return false; // Game continues
+    }
+
     public void playAgain() {
         String answer = prompter.prompt("Do you want to play again? 'Yes' or 'No': "
-                ).trim().toLowerCase();
-        if("no".equals(answer)) {
+        ).trim().toLowerCase();
+        if ("no".equals(answer)) {
             gameInProgress = false;
             clear();
             goodBye();
-        }
-        else if ("yes".equals(answer)) {
+        } else if ("yes".equals(answer)) {
             dealer.resetHands();
             gameQuestions();
-        }
-        else {
+        } else {
             System.out.printf("Please enter 'Yes' or 'No': ");
         }
     }
 
     public void anyBlackJack() {
-        for(var entry: dealer.getPlayerHands().entrySet()) {
+        for (var entry : dealer.getPlayerHands().entrySet()) {
             var player = entry.getKey();
             var hand = entry.getValue();
-//            if(!hand.hasBlackjack()) {
-//                System.out.println(player.getName() + " has Blackjack!");
-//            }
         }
-
-//        if (!dealer.getDealerHand().hasBlackjack()){
-//            System.out.printf("Dealer has Blackjack");
-//        }
     }
 
-
-
-
-/*    private void hitMeOrStand() {
-        clear();
-
-        player.scoreHand();
-        boolean yourTurn = false;
-        while(!yourTurn){
-            String playerInput = prompter.prompt("What's your next move? 'Hit Me' or 'Stand': ");
-            if("Hit me".equals(playerInput)){
-                dealer.giveCard();
-                player.scoreHand();
-            } else if("Stand".equals(playerInput)){
-                player.scoreHand();
-            }
-        }
-    }*/
-
-
-
-
-    public void finalResults(){
+    public void finalResults() {
         dealer.showResults();
     }
 
-    public void goodBye(){
+    public void goodBye() {
         clear();
         System.out.println("Thanks for playing Savage BlackJack");
     }
-
-
 }

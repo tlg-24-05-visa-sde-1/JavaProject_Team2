@@ -5,19 +5,18 @@ import java.util.List;
 
 public class Hand {
     private List<Card> cards = new ArrayList<>();
-    private Dealer dealer ;
+    private Dealer dealer;
 
-    public Hand(){
+    public Hand() {
     }
 
-    public Hand(Dealer dealer){
+    public Hand(Dealer dealer) {
         this.dealer = dealer;
     }
 
     public void addCard(Card card) {
         cards.add(card);
-//        hand.add(Card.ACE_HEARTS);
-//        hand.add(Card.JACK_CLUBS);
+
     }
 
 
