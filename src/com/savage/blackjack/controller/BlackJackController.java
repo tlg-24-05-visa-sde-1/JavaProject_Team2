@@ -91,7 +91,7 @@ public class BlackJackController {
                         dealer.showHands();
                     }
                     case "stand" -> gameOn = false;
-                    default -> System.out.printf("Invalid choice. Please type 'Hit' or 'Stand'.");
+                    default -> System.out.printf("Invalid choice. Please type 'Hit' or 'Stand'");
                 }
             }
         }
@@ -109,6 +109,7 @@ public class BlackJackController {
     public void dealerGo() {
         while(dealer.dealerContinueGame()) {
             dealer.giveNextDealerCard();
+            dealer.showHands();
         }
 //        showHand();
     }
