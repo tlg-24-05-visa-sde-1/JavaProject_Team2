@@ -103,7 +103,7 @@ public class BlackJackController {
         while(dealer.dealerContinueGame()) {
             dealer.giveNextDealerCard();
         }
-        showHand();
+//        showHand();
     }
 
     public void playAgain() {

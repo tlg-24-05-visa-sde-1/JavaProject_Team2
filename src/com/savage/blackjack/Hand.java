@@ -44,7 +44,6 @@ public class Hand {
     }
 
     public void scoreHand() {
-
         StringBuilder output = new StringBuilder();
 
         for (int i = 0; i < 6; i++) {
@@ -54,7 +53,6 @@ public class Hand {
             }
             line.append("\n");
             output.append(line);
-
         }
         System.out.println(output);
     }
