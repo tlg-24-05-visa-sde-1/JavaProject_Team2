@@ -64,6 +64,7 @@ public class BlackJackController {
             String playerName = prompter.prompt("Please enter your name, then press [Enter] when done: ");
             if (!playerName.trim().isEmpty()) {
                 dealer.addPlayer(playerName);
+                clear();
             } else {
                 finished = true;
             }
@@ -82,7 +83,7 @@ public class BlackJackController {
         for (String playerName : dealer.getPlayerNames()) {
             boolean gameOn = true;
             while (gameOn && dealer.playerContinueGame(playerName)) {
-                clear();
+//                clear();
 
                 String answer = prompter.prompt(playerName + ", Would you like to 'Hit' or 'Stand': "
                 ).trim().toLowerCase();
@@ -163,6 +164,7 @@ public class BlackJackController {
             clear();
             goodBye();
         } else if ("yes".equals(answer)) {
+            clear();
             dealer.resetHands();
             gameQuestions();
         } else {

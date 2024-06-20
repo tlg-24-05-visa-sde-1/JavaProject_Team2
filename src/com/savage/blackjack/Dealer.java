@@ -141,8 +141,8 @@ public class Dealer extends Player{
                 System.out.printf("%s loses to the Dealer with a %s card score.\n", player.getName(), playerHand.handValue());
                 System.out.printf("Dealer beats %s with a %s card score.\n", player.getName(), dealerHand.handValue());
             } else {
-                System.out.printf("%s has a card score of %s.\n The Dealer also has a card score of %s.\n The Game is a Tie!.\n ",
-                        player.getName(), playerHand.handValue(), dealerHand.handValue());
+                System.out.printf("%s has a card score of %s.\n The Dealer also has a card score of %s.\n %s and Dealer has a Tie!.\n ",
+                        player.getName(), playerHand.handValue(), dealerHand.handValue(), player.getName());
             }
         }
     }
