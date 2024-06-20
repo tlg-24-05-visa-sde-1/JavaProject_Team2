@@ -47,7 +47,7 @@ public class Dealer extends Player{
         return deck.remove(deck.size() - 1);
     }
 
-    public void giveNextPlayerCard(String playerName) { // *Dai* - I added this method for the hit or stand
+    public void giveNextPlayerCard(String playerName) {
         Player player = players.stream().filter(p -> p.getName().equals(playerName)).findFirst().orElse(null);
         if(player != null){
             Hand hand = playerHands.get(player);
@@ -158,9 +158,4 @@ public class Dealer extends Player{
         return "name= " + name;
     }
 
-    public void dump(){
-        for(Player item : players){
-            System.out.println(item.toString());
-        }
-    }
 }
