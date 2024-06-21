@@ -171,5 +171,13 @@ public class Dealer extends Player{
     public String toString() {
         return "name= " + name;
     }
+    //getters for testing
+    public Collection<Object> getDeck() {
+        return Collections.unmodifiableList(deck);
+    }
+
+    public List<Player> getPlayers() {
+        return Collections.unmodifiableList(players);
+    }
 
 }
