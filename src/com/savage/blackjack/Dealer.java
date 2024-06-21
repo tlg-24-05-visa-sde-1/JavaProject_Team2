@@ -172,7 +172,7 @@ public class Dealer extends Player{
         return "name= " + name;
     }
 
-
+        //getters for testing
     public Collection<Object> getDeck() {
         return Collections.unmodifiableList(deck);
     }
