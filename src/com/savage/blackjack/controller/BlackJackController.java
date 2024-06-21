@@ -39,7 +39,6 @@ public class BlackJackController {
             showHand();
             playerGo();
             dealerGo();
-            anyBlackJack();
             finalResults();
             playAgain();
             goodBye();
@@ -64,6 +63,7 @@ public class BlackJackController {
             String playerName = prompter.prompt("Please enter your name, then press [Enter] when done: ");
             if (!playerName.trim().isEmpty()) {
                 dealer.addPlayer(playerName);
+                clear();
             } else {
                 finished = true;
             }
@@ -82,7 +82,7 @@ public class BlackJackController {
         for (String playerName : dealer.getPlayerNames()) {
             boolean gameOn = true;
             while (gameOn && dealer.playerContinueGame(playerName)) {
-                clear();
+//                clear();
 
                 String answer = prompter.prompt(playerName + ", Would you like to 'Hit' or 'Stand': "
                 ).trim().toLowerCase();
@@ -120,7 +120,7 @@ public class BlackJackController {
         }
 
         if (dealerHasBlackJack || playerHasBlackJack) {
-            System.out.println("Initial BlackJack check results");
+            System.out.println();
             if (playerHasBlackJack && !dealerHasBlackJack) {
                 System.out.println(playerWithBlackJack.getName() + " has BlackJack and wins!");
             } else if (!playerHasBlackJack && dealerHasBlackJack) {
@@ -138,7 +138,6 @@ public class BlackJackController {
         boolean anyPlayerHasBlackJack = false;
 
         if (dealerHasBlackJack) {
-            System.out.println("Dealer has BlackJack");
             for (var entry : dealer.getPlayerHands().entrySet()) {
                 var player = entry.getKey();
                 var hand = entry.getValue();
@@ -148,7 +147,7 @@ public class BlackJackController {
                 }
             }
             if (!anyPlayerHasBlackJack) {
-                System.out.println("Dealer wins with BlackJack!");
+                System.out.println();
             }
             return true; // Game ends
         }
@@ -163,6 +162,7 @@ public class BlackJackController {
             clear();
             goodBye();
         } else if ("yes".equals(answer)) {
+            clear();
             dealer.resetHands();
             gameQuestions();
         } else {
@@ -170,12 +170,12 @@ public class BlackJackController {
         }
     }
 
-    public void anyBlackJack() {
+/*    public void anyBlackJack() {
         for (var entry : dealer.getPlayerHands().entrySet()) {
             var player = entry.getKey();
             var hand = entry.getValue();
         }
-    }
+    }*/
 
     public void finalResults() {
         dealer.showResults();
