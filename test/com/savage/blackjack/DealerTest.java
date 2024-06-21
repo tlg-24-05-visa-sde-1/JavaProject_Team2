@@ -10,20 +10,21 @@ public class DealerTest {
     private Dealer dealer;
 
     @Before
-    public void setUp(){
+    public void setUp() {
         dealer = new Dealer();
     }
 
     @Test
     public void testAddPlayer() {
         dealer.addPlayer("Kobe");
-        assertEquals(1, dealer.getPlayers().size());
+        dealer.addPlayer("Jay");
+        assertEquals(2, dealer.getPlayers().size());
         assertEquals("Kobe", dealer.getPlayers().get(0).getName());
         System.out.println(dealer.getPlayers().size() + " is ready to play.");
     }
 
     @Test
-    public void testDealCards(){
+    public void testDealCards() {
         // players
         dealer.addPlayer("Tomiwa");
         dealer.addPlayer("Daiyron");
@@ -36,7 +37,7 @@ public class DealerTest {
 
         // get size of dealer's hand, should be 2
         Hand dealerHand = dealer.getDealerHand();
-        assertEquals( 2, dealerHand.getCards().size());
+        assertEquals(2, dealerHand.getCards().size());
         System.out.println("Dealer hand has: " + dealerHand.getCards().size() + " cards.");
 
         // get size of each player's hand, should be 2
@@ -48,16 +49,18 @@ public class DealerTest {
         }
     }
 
-    @Test
-    public void testResetHands() {
-        dealer.addPlayer("Tomiwa");
-        dealer.addPlayer("Daiyron");
-        dealer.addPlayer("Gabriel");
-        dealer.shuffleCards();
-        dealer.dealCards();
-        dealer.resetHands();
-        assertEquals(0, dealer.getDealerHand().getCards().size());
-        assertEquals(0, dealer.getPlayerHands().size());
-        assertEquals(52, dealer.getDeck().size());
+        @Test
+        public void testResetHands() {
+            dealer.addPlayer("Tomiwa");
+            dealer.addPlayer("Daiyron");
+            dealer.addPlayer("Gabriel");
+            dealer.shuffleCards();
+            dealer.dealCards();
+            dealer.resetHands();
+            assertEquals(0, dealer.getDealerHand().getCards().size());
+            assertEquals(0, dealer.getPlayerHands().size());
+            assertEquals(52, dealer.getDeck().size());
+        }
     }
-}
+
+
