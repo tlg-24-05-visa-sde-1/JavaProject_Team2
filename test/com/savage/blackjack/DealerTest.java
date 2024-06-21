@@ -18,7 +18,8 @@ public class DealerTest {
     public void testAddPlayer() {
         dealer.addPlayer("Kobe");
         dealer.addPlayer("Jay");
-        assertEquals(2, dealer.getPlayers().size());
+        dealer.addPlayer("21 Savage");
+        assertEquals(3, dealer.getPlayers().size());
         assertEquals("Kobe", dealer.getPlayers().get(0).getName());
         System.out.println(dealer.getPlayers().size() + " is ready to play.");
     }
